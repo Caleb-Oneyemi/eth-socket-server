@@ -3,8 +3,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import compression from 'compression'
 
-import { errorHandler, NotFoundError } from '../common'
-
 export default (app: Application): void => {
   app.use(cors())
   app.use(helmet())
@@ -15,10 +13,4 @@ export default (app: Application): void => {
       extended: true,
     }),
   )
-
-  app.all('*', (req, res, next) => {
-    next(new NotFoundError('route not found'))
-  })
-
-  app.use(errorHandler)
 }
