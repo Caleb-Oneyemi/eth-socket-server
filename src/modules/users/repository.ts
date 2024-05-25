@@ -8,7 +8,7 @@ export class UserRepository extends Repository<User> {
     return this.create({ username, password })
   }
 
-  async(username: string): Promise<IUser | undefined> {
+  async findByUsername(username: string): Promise<IUser | undefined> {
     return this.findOne({ where: { username } })
   }
 }

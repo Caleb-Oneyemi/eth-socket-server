@@ -13,7 +13,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id!: number
 
-  @Column({ length: 30 })
+  @Column({ unique: true, length: 30 })
   public username: string
 
   @Column()
