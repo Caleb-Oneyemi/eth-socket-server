@@ -4,7 +4,10 @@
   "scripts": {
     "start": "dotenv node dist/index.js",
     "build": "tsc --project tsconfig.prod.json",
-    "dev": "dotenv nodemon src/index.ts"
+    "dev": "dotenv nodemon src/index.ts",
+    "create:migration": "typeorm migration:create -d ./src/migrations",
+    "run:migration": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "revert:migration": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",

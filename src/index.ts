@@ -1,23 +1,15 @@
 import http from 'http'
 import { Server as SocketServer } from 'socket.io'
-import { Application } from 'express'
+import express, { Application } from 'express'
 import config from 'config'
-import { createExpressServer, useContainer } from 'routing-controllers'
 
 import loadApp from './loaders'
 import { Logger } from './common'
-import { UserController } from './modules/users/controller'
-import Container from 'typedi'
 
 const port = config.get<number>('port')
 
 const startServer = async () => {
-  useContainer(Container)
-
-  const app: Application = createExpressServer({
-    routePrefix: '/api/v1',
-    controllers: [UserController],
-  })
+  const app: Application = express()
 
   await loadApp(app)
 

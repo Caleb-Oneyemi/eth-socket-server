@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 import { ICreateUser } from './types'
 
-@Entity({ name: 'user' })
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id!: number
@@ -25,9 +25,9 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   public updatedAt!: Date | string
 
-  constructor({ username, password }: ICreateUser) {
+  constructor(data: ICreateUser) {
     super()
-    this.username = username
-    this.password = password
+    this.username = data?.username
+    this.password = data?.password
   }
 }

@@ -18,6 +18,8 @@ const dbConfig: PostgresConnectionOptions = {
   database: name,
   synchronize: true,
   logging: false,
+  entities: ['./src/modules/users/entity{.ts,.js}'],
+  migrations: ['./src/migrations/*{.ts,.js}'],
 }
 
 export default dbConfig

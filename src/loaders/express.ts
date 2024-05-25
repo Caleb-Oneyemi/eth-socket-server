@@ -2,6 +2,9 @@ import express, { Application } from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import compression from 'compression'
+import { useExpressServer, useContainer } from 'routing-controllers'
+import Container from 'typedi'
+import { UserController } from '../modules/users/controller'
 
 export default (app: Application): void => {
   app.use(cors())
@@ -13,4 +16,11 @@ export default (app: Application): void => {
       extended: true,
     }),
   )
+
+  useContainer(Container)
+  useExpressServer(app, {
+    routePrefix: '/api/v1',
+    controllers: [UserController],
+    defaultErrorHandler: false,
+  })
 }

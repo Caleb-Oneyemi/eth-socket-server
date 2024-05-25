@@ -5,7 +5,7 @@ import { ICreateUser, IUser } from './types'
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async saveNew({ username, password }: ICreateUser): Promise<IUser> {
-    return this.create({ username, password })
+    return this.create({ username, password }).save()
   }
 
   async findByUsername(username: string): Promise<IUser | undefined> {
