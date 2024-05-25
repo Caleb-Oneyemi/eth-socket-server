@@ -1,4 +1,5 @@
 .yarn
+.env
 node_modules
 
 # Swap the comments on the following lines if you wish to use zero-installs

@@ -1,0 +1,12 @@
+{
+  "env": "development",
+  "port": "",
+  "logLevel": "",
+  "db": {
+    "host": "",
+    "port": "",
+    "username": "",
+    "password": "",
+    "name": ""
+  }
+}
