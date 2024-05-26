@@ -12,12 +12,18 @@ An api that pulls data from ethereum and publishes to all listeners via socket.i
 - Express
 - TypeDI
 
-## setup
+## startup
 
 Create a .env file from the .env.example file and ensure all values are present.
 
 ```sh
 cp .env.example .env
+```
+
+Run Docker Compose to spin up api and db
+
+```sh
+docker-compose up
 ```
 
 ## endpoints

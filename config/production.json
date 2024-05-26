@@ -1,0 +1,18 @@
+{
+  "env": "production",
+  "port": "",
+  "logLevel": "",
+  "jwtSecret": "",
+  "db": {
+    "host": "",
+    "port": "",
+    "username": "",
+    "password": "",
+    "name": ""
+  },
+  "rpcUrls": {
+    "ankr": "",
+    "cloudflare": "",
+    "eth_public": ""
+  }
+}

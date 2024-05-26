@@ -7,6 +7,8 @@ const connect = async (): Promise<{ connection: Connection }> => {
   useContainer(Container)
   const connection = await createConnection(dbConfig)
 
+  await connection.runMigrations({ transaction: 'all' })
+
   typedi.Container.set('connection', connection)
 
   return { connection }
