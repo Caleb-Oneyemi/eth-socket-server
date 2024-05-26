@@ -4,7 +4,7 @@ import express, { Application } from 'express'
 import config from 'config'
 
 import loadApp from './loaders'
-import { Logger } from './common'
+import { Logger, auth } from './common'
 
 const port = config.get<number>('port')
 
@@ -16,6 +16,8 @@ const startServer = async () => {
   const server = http.createServer(app)
 
   const io = new SocketServer(server)
+
+  io.use(auth)
 
   io.on('connection', (client) => {
     Logger.info('client connected')

@@ -43,7 +43,7 @@ class UserService {
       throw new ConflictError('invalid credentials')
     }
 
-    const { isValid, salt } = await verifyPassword(password, user.password)
+    const isValid = await verifyPassword(password, user.password)
     if (!isValid) {
       throw new ConflictError('invalid credentials')
     }
@@ -51,7 +51,6 @@ class UserService {
     const token = generateToken({
       id: user.id,
       username: user.username,
-      salt,
     })
 
     return { user, token }
