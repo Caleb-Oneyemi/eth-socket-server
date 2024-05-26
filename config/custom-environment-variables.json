@@ -10,5 +10,9 @@
     "password": "DB_PASSWORD",
     "name": "DB_NAME"
   },
-  "providerUrl": "PROVIDER_URL"
+  "rpcUrls": {
+    "ankr": "ANKR_RPC_URL",
+    "cloudflare": "CLOUDFLARE_RPC_URL",
+    "eth_public": "ETH_PUBLIC_RPC_URL"
+  }
 }

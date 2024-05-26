@@ -10,5 +10,9 @@
     "password": "",
     "name": ""
   },
-  "providerUrl": ""
+  "rpcUrls": {
+    "ankr": "",
+    "cloudflare": "",
+    "eth_public": ""
+  }
 }

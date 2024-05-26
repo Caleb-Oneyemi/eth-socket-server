@@ -22,22 +22,38 @@ export const handleTransactions = async (io: Server): Promise<void> => {
     return
   }
 
-  const url = config.get<string>('providerUrl')
-  if (!url) {
-    Logger.warn('@handleTransactionsJob PROVIDER_URL not provided')
+  const { ankr, cloudflare, eth_public } = config.get<{
+    ankr: string
+    cloudflare: string
+    eth_public: string
+  }>('rpcUrls')
+
+  if (!ankr || !cloudflare || !eth_public) {
+    Logger.warn('@handleTransactionsJob all rpc urls must be provided')
     return
   }
 
   try {
-    const { data: blockNumberRes } = await axios.post<GetBlockNumberResponse>(
-      url,
-      {
+    const { data: blockNumberRes } = await Promise.any([
+      axios.post<GetBlockNumberResponse>(ankr, {
         jsonrpc: '2.0',
         method: 'eth_blockNumber',
         params: [],
         id: 1,
-      },
-    )
+      }),
+      axios.post<GetBlockNumberResponse>(cloudflare, {
+        jsonrpc: '2.0',
+        method: 'eth_blockNumber',
+        params: [],
+        id: 1,
+      }),
+      axios.post<GetBlockNumberResponse>(eth_public, {
+        jsonrpc: '2.0',
+        method: 'eth_blockNumber',
+        params: [],
+        id: 1,
+      }),
+    ])
 
     if (!blockNumberRes.result) {
       Logger.warn(`@handleTransactionsJob could not retrieve block number`)
@@ -48,12 +64,26 @@ export const handleTransactions = async (io: Server): Promise<void> => {
       `@handleTransactionsJob retrieved block number ${blockNumberRes.result}`,
     )
 
-    const { data } = await axios.post<GetLatestBlockResponse>(url, {
-      jsonrpc: '2.0',
-      method: 'eth_getBlockByNumber',
-      params: [blockNumberRes.result, true],
-      id: 1,
-    })
+    const { data } = await Promise.any([
+      axios.post<GetLatestBlockResponse>(ankr, {
+        jsonrpc: '2.0',
+        method: 'eth_getBlockByNumber',
+        params: [blockNumberRes.result, true],
+        id: 1,
+      }),
+      axios.post<GetLatestBlockResponse>(cloudflare, {
+        jsonrpc: '2.0',
+        method: 'eth_getBlockByNumber',
+        params: [blockNumberRes.result, true],
+        id: 1,
+      }),
+      axios.post<GetLatestBlockResponse>(eth_public, {
+        jsonrpc: '2.0',
+        method: 'eth_getBlockByNumber',
+        params: [blockNumberRes.result, true],
+        id: 1,
+      }),
+    ])
 
     Logger.debug(
       `@handleTransactionsJob retrieved ${data.result?.transactions?.length || 0} transactions for block number ${blockNumberRes.result}`,
