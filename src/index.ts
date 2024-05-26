@@ -6,6 +6,7 @@ import config from 'config'
 import loadApp from './loaders'
 import { Logger, auth, validateSubscriptionHeaders } from './common'
 import { connectionHandler } from './handler'
+import { startJob } from './job'
 
 const port = config.get<number>('port')
 
@@ -24,6 +25,8 @@ const startServer = async () => {
   io.on('connection', connectionHandler)
 
   server.listen(port)
+
+  startJob(io)
 }
 
 startServer()
