@@ -5,6 +5,7 @@ import config from 'config'
 
 import loadApp from './loaders'
 import { Logger, auth } from './common'
+import { connectionHandler } from './handler'
 
 const port = config.get<number>('port')
 
@@ -19,15 +20,7 @@ const startServer = async () => {
 
   io.use(auth)
 
-  io.on('connection', (client) => {
-    Logger.info('client connected')
-
-    client.on('event', (data) => {
-      Logger.debug('socket data', data)
-    })
-
-    client.on('disconnect', () => {})
-  })
+  io.on('connection', connectionHandler)
 
   server.listen(port)
 }
