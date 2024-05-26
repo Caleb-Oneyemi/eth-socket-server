@@ -4,7 +4,7 @@ import express, { Application } from 'express'
 import config from 'config'
 
 import loadApp from './loaders'
-import { Logger, auth } from './common'
+import { Logger, auth, validateSubscriptionHeaders } from './common'
 import { connectionHandler } from './handler'
 
 const port = config.get<number>('port')
@@ -19,6 +19,7 @@ const startServer = async () => {
   const io = new SocketServer(server)
 
   io.use(auth)
+  io.use(validateSubscriptionHeaders)
 
   io.on('connection', connectionHandler)
 

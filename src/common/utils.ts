@@ -8,6 +8,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 
 import { CustomError } from './errors'
 import { Logger } from './logger'
+import { SUBSCRIPTION_TYPES } from './types'
 
 const scrypt = promisify(crypto.scrypt)
 const randomBytes = promisify(crypto.randomBytes)
@@ -109,4 +110,12 @@ export const formatErrorResponse = (
     status: httpStatus.INTERNAL_SERVER_ERROR,
     errors: [{ message: 'something went wrong' }],
   }
+}
+
+export const getRoom = (subscriptionType: string, address: string): string => {
+  if (subscriptionType === SUBSCRIPTION_TYPES.ALL) {
+    return subscriptionType
+  }
+
+  return `${subscriptionType}:${address}`
 }
