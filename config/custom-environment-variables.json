@@ -2,6 +2,7 @@
   "env": "NODE_ENV",
   "port": "PORT",
   "logLevel": "LOG_LEVEL",
+  "jwtSecret": "JWT_SECRET",
   "db": {
     "host": "DB_HOST",
     "port": "DB_PORT",

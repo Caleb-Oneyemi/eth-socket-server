@@ -2,6 +2,7 @@
   "env": "development",
   "port": "",
   "logLevel": "",
+  "jwtSecret": "",
   "db": {
     "host": "",
     "port": "",
