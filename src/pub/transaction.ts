@@ -24,6 +24,6 @@ export const publishTransaction = (
   ]
 
   rooms.map((room) => {
-    io.send(room).emit('new_activity', event)
+    io.to(room).emit('new_activity', event)
   })
 }
