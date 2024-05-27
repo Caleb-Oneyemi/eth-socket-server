@@ -19,8 +19,6 @@ FROM node:18.12.0-alpine AS final
 
 WORKDIR /app
 
-EXPOSE 7777
-
 ENV NODE_ENV production
 
 RUN apk add --no-cache tini
