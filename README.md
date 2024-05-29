@@ -32,6 +32,8 @@ A jwt is required to access the websocket endpoint. To get this, first register 
 
 - Register:
 
+POST `http://localhost:$PORT/api/v1/users`
+
 ```json
 {
   "username": "username",
@@ -41,6 +43,8 @@ A jwt is required to access the websocket endpoint. To get this, first register 
 
 - Login:
 
+POST `http://localhost:$PORT/api/v1/users/login`
+
 ```json
 {
   "username": "username",
@@ -49,6 +53,8 @@ A jwt is required to access the websocket endpoint. To get this, first register 
 ```
 
 - SocketIO
+
+http://localhost:$PORT
 
 The socketIO component requires the following headers: token, subscription-type and eth-address. subscription-type can be one of `all | sender_only | receiver_only | sender_or_receiver`. When it is `all`, eth-address will be ignored.
 
